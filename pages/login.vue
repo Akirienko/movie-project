@@ -1,6 +1,7 @@
 <script setup>
   const user = useUser();
-  // const emit = defineEmits(['name', 'password'])
+  const name = ref('');
+  const password = ref('');
 </script>
 
 <template>

@@ -1,9 +1,12 @@
-<script setup lang="ts">
-import { ref } from 'vue';
-import {useUser} from '../../stores/User'
+<script setup>
+// import { ref } from 'vue';
+// import {useUser} from '../../stores/User'
+
+import { storeToRefs } from 'pinia';
 
 const user = useUser();
-console.log(user);
+
+const { isLoggedIn } = storeToRefs(user)
 
 
 const query = ref("batman");
@@ -28,8 +31,8 @@ const closeModal = () => {
     isModalOpen.value = false;
 };
 
-const favorite = (el: any)=> {
-  if(!user.isLoggedIn) {
+const favorite = (el)=> {
+  if(!isLoggedIn.value) {
     return isModalOpen.value = true;
   }
   favoriteMovies.value.push(el);
