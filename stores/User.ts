@@ -6,10 +6,9 @@ export const useUser = defineStore('user', {
   },
   getters: {
     isUserExist: (state) => {
-      if(localStorage.getItem("is-user")) {
+      if(!!state.isLoggedIn || !!localStorage.getItem("is-user")) {
         state.isLoggedIn = true;
       }
-
     }
   },
   actions: {

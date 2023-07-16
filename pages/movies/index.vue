@@ -1,19 +1,19 @@
 <script setup>
-// import { ref } from 'vue';
-// import {useUser} from '../../stores/User'
-
 import { storeToRefs } from 'pinia';
 
 const user = useUser();
+const favoriteMovie = favoriteMovies();
 
-const { isLoggedIn } = storeToRefs(user)
+// const { favorite, addFavorite } = storeToRefs(favoriteMovie);
+const { isLoggedIn } = storeToRefs(user);
 
+console.log('favoriteMovies', favoriteMovie);
 
 const query = ref("batman");
 const movies = ref([]);
 const loadedPosts = ref(6);
 const addNewPosts = 3;
-const favoriteMovies = ref([])
+// const favoriteMovies = ref([])
 
 async function search() {
   const { Search } = await $fetch(`http://www.omdbapi.com/?apikey=277a8905&s=${query.value}`);
@@ -31,13 +31,12 @@ const closeModal = () => {
     isModalOpen.value = false;
 };
 
-const favorite = (el)=> {
+const addFavoriteMovie = (el) => {
   if(!isLoggedIn.value) {
     return isModalOpen.value = true;
   }
-  favoriteMovies.value.push(el);
-  console.log(favoriteMovies);
-
+  favoriteMovie.addFavorite(el);
+  console.log(favoriteMovie.favorite);
 }
 </script>
 
@@ -53,7 +52,7 @@ const favorite = (el)=> {
           <img :src="movie.Poster" :alt="movie.Title">
         </NuxtLink>
         <div class="flex justify-center mt-2.5">
-          <button @click="favorite(movie)" class="border border-black rounded px-2.5">Add to favorite</button>
+          <button @click="addFavoriteMovie(movie)" class="border border-black rounded px-2.5">Add to favorite</button>
         </div>
       </li>
     </ul>

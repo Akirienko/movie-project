@@ -23,8 +23,8 @@
   .wrapper {
     padding-left: calc((100vw - 1200px) / 2);
     padding-right: calc((100vw - 1200px) / 2);
-    max-width: 1200px;
-    margin: auto;
+    /* max-width: 1200px;
+    margin: auto; */
 	}
 
 	h1,
