@@ -27,6 +27,8 @@ function loadMore() {
 }
 
 const isModalOpen = ref(false);
+const addedToFavorite = ref(false);
+
 const closeModal = () => {
     isModalOpen.value = false;
 };
@@ -36,6 +38,10 @@ const addFavoriteMovie = (el) => {
     return isModalOpen.value = true;
   }
   favoriteMovie.addFavorite(el);
+  addedToFavorite.value = true;
+  setTimeout(()=>{
+    addedToFavorite.value = false;
+  }, 500)
   console.log(favoriteMovie.favorite);
 }
 </script>
@@ -60,5 +66,6 @@ const addFavoriteMovie = (el) => {
       <button @click="loadMore" class="border-2 border-black rounded px-10 py-5">Load more</button>
     </div>
   </section>
-  <ModalComponent :isOpen="isModalOpen" @close-modal="closeModal"/>
+  <LoginModal :isOpen="isModalOpen" @close-modal="closeModal"/>
+  <AddTofavoriteModal :isOpen="addedToFavorite" />
 </template>
